@@ -22,7 +22,12 @@ with open(csvpath, newline='') as csvfile:
             countnames[name] += 1
         else:
             countnames[name] = 1
-
+    winner_name = ''
+    max_votes = 0
+    for key, value in countnames.items():
+        if value > max_votes:
+            max_votes = value
+            winner_name = key
 
     # Print data
     with open("output.txt", "a") as f:
@@ -31,20 +36,9 @@ with open(csvpath, newline='') as csvfile:
         print('Total Votes: ' + str(total_votes), file=f)
         print('-----------------------------', file=f)
 
-        pct_list = []
-        candidate_list = []
-        for k in countnames:
-            pctcount = float(countnames[k]) / float(total_votes) * 100
-            pct_list.append(pctcount)
-            candidate_list.append(k)
-
-        max_pct = max(pct_list)
-        rMax = pct_list.index(max(pct_list))
-        winner = candidate_list[rMax]
-
         for k in countnames:
             pctcount = float(countnames[k]) / float(total_votes) * 100
             print(str(k)+": " + "{0:0.3f}".format(pctcount) + "%" + " (" + str(countnames[k]) + ")", file=f)
         print('-----------------------------', file=f) 
-        print('Winner: ' + str(winner), file=f) 
+        print('Winner: ' + str(winner_name), file=f) 
         print('-----------------------------', file=f) 
