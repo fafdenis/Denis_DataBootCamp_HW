@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# List of things to ignore
+api_keys.py
+config.py
